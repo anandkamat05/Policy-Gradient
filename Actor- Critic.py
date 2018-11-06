@@ -97,7 +97,9 @@ class PolicyEstimator():
             self.action = self.normal_dist._sample_n(1)
             self.action = tf.clip_by_value(self.action, env.action_space.low[0], env.action_space.high[0])
 
-            # Loss and train op
+            # Loss and tr
+from sklearn.kernel_approximation import RBFSampler
+ain op
             self.loss = -self.normal_dist.log_prob(self.action) * self.target
             # Add cross entropy cost to encourage exploration
             self.loss -= 1e-1 * self.normal_dist.entropy()

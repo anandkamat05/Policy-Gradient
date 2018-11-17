@@ -3,22 +3,22 @@ from gym import core, spaces
 from gym.envs.registration import register
 
 
-class Fourrooms(core.Env):
+class Gridworld(core.Env):
     def __init__(self):
 
         layout = """\
 wwwwwwwwwwwww
-w     w     w
-w     w     w
 w           w
-w     w     w
-w     w     w
-ww wwww     w
-w     www www
-w     w     w
-w     w     w
 w           w
-w     w     w
+w           w
+w           w
+w           w
+w           w
+w           w
+w           w
+w           w
+w           w
+w           w
 wwwwwwwwwwwww
 """
         """
@@ -30,7 +30,6 @@ wwwwwwwwwwwww
 
         Deterministic Actions
 
-        Introducing variable rewards in "frozen"/ "slippery" state in range U[-15, 15] where expected value is zero as another states
         Reward for Goal state : 50
         Reward for Normal state/ hits wall:0
         """
@@ -98,7 +97,7 @@ wwwwwwwwwwwww
 
 
 register(
-    id='Fourrooms-v0',
-    entry_point='fourrooms:Fourrooms',
+    id='Gridworld-v0',
+    entry_point='gridworld:Gridworld',
     timestep_limit=500,
 )

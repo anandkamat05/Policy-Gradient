@@ -4,7 +4,6 @@
 # In[1]:
 
 
-get_ipython().run_line_magic('matplotlib', 'inline')
 
 import gym
 import itertools
@@ -16,9 +15,6 @@ import collections
 
 if "../" not in sys.path:
   sys.path.append("../") 
-
-get_ipython().run_line_magic('matplotlib', 'inline')
-
 
 # In[2]:
 

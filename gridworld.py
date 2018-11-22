@@ -77,7 +77,7 @@ wwwwwwwwwwwww
         either case, if the movement would take the agent into a wall then the agent remains in the
         same cell.
         """
-        reward = 0
+        reward = -1
         if self.rng.uniform() < 1 / 5.:
             empty_cells = self.empty_around(self.currentcell)
             nextcell = empty_cells[self.rng.randint(len(empty_cells))]

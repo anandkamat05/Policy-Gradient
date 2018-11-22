@@ -9,12 +9,12 @@ import numpy as np
 import gym
 import collections
 import itertools
+import matplotlib.pyplot as plt
 from gridworld import Gridworld
 # In[3]:
 
 
 env = gym.make('Gridworld-v0')
-
 
 # In[ ]:
 
@@ -53,7 +53,7 @@ class Actor():
             self.loss = -tf.log(self.picked_action_prob) * self.target
 
         with tf.variable_scope('train_actor'):
-            self.train_operation = tf.train.AdamOptimizer(lr).minimize(-self.loss)
+            self.train_operation = tf.train.AdamOptimizer(lr).minimize(self.loss)
 
     def update(self, state, target, action, sess=None):
         sess = sess or tf.get_default_session()
@@ -165,8 +165,10 @@ def actor_critic(env, actor, critic, iterations=300, gamma=1.0):
                 break
 
             state = next_state
+        reward_list.append(episode_reward)
+        epi_len_list.append(iterations)
 
-    return episode_reward, episode_len
+    return reward_list, epi_len_list
 
 
 tf.reset_default_graph()
@@ -181,7 +183,7 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     # Note, due to randomness in the policy the number of episodes you need to learn a good
     # policy may vary. ~300 seemed to work well for me.
-    episode_reward, episode_len = actor_critic(env, policy_estimator, value_estimator)
+    reward_list, epi_len_list = actor_critic(env, policy_estimator, value_estimator)
 writer.close()
 
 #Plot Rewards per episode
